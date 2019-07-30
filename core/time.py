@@ -131,7 +131,7 @@ class UserFriendlyTime(Converter):
             # apparently nlp does not like "from now"
             # it likes "from x" in other cases though
             # so let me handle the 'now' case
-            if argument.endswith(" from now"):
+            if argument.endswith(" fra nu"):
                 argument = argument[:-9].strip()
             # handles "for xxx hours"
             if argument.startswith("for "):
@@ -207,12 +207,12 @@ def human_timedelta(dt, *, source=None):
         suffix = ""
     else:
         delta = relativedelta(now, dt)
-        suffix = " ago"
+        suffix = " siden"
 
     if delta.microseconds and delta.seconds:
         delta = delta + relativedelta(seconds=+1)
 
-    attrs = ["years", "months", "days", "hours", "minutes", "seconds"]
+    attrs = ["år", "måneder", "dage", "timer", "minutter", "sekunder"]
 
     output = []
     for attr in attrs:
