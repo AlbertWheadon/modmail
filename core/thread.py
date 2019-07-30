@@ -881,7 +881,7 @@ class ThreadManager:
 
         if log_count:
             # embed.add_field(name='Past logs', value=f'{log_count}')
-            thread = "gange" if log_count == 1 else "gang"
+            thread = "gang" if log_count == 1 else "gange"
             embed.description += f". Har kontaktet os **{log_count}**  {thread}."
         else:
             embed.description += "."
