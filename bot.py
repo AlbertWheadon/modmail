@@ -537,9 +537,9 @@ class ModmailBot(commands.Bot):
             if reason.startswith("System Message: New Account.") or changed:
                 await message.channel.send(
                     embed=discord.Embed(
-                        title="Message not sent!",
-                        description=f"Your must wait for {delta} "
-                        f"before you can contact {self.user.mention}.",
+                        title="Besked ikke sendt!",
+                        description=f"Du skal vente på {delta} "
+                        f"før du kan kontakte {self.user.mention}.",
                         color=discord.Color.red(),
                     )
                 )
@@ -696,7 +696,7 @@ class ModmailBot(commands.Bot):
                 await self.api.append_log(message, type_="internal")
         elif ctx.invoked_with:
             exc = commands.CommandNotFound(
-                'Command "{}" is not found'.format(ctx.invoked_with)
+                'Kommandoen "{}" blev ikke fundet'.format(ctx.invoked_with)
             )
             self.dispatch("command_error", ctx, exc)
 
@@ -788,7 +788,7 @@ class ModmailBot(commands.Bot):
         thread = await self.threads.find(recipient=member)
         if thread:
             embed = discord.Embed(
-                description="The recipient has left the server.",
+                description="Personen har forladt serveren.",
                 color=discord.Color.red(),
             )
             await thread.channel.send(embed=embed)
@@ -797,7 +797,7 @@ class ModmailBot(commands.Bot):
         thread = await self.threads.find(recipient=member)
         if thread:
             embed = discord.Embed(
-                description="The recipient has joined the server.", color=self.mod_color
+                description="Personen har joinet serveren.", color=self.mod_color
             )
             await thread.channel.send(embed=embed)
 
