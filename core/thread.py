@@ -152,7 +152,7 @@ class Thread:
         # Once thread is ready, tell the recipient.
         thread_creation_response = self.bot.config.get(
             "thread_creation_response",
-            "The staff team will get back to you as soon as possible.",
+            "Du får svar hurtigst muligt.",
         )
 
         embed = discord.Embed(
@@ -161,9 +161,9 @@ class Thread:
             timestamp=channel.created_at,
         )
 
-        footer = "Your message has been sent"
+        footer = "Din besked er blevet sendt"
         if not self.bot.config.get("disable_recipient_thread_close"):
-            footer = "Click the lock to close the thread"
+            footer = "Klik på låsen for lukke samtalen"
 
         footer = self.bot.config.get("thread_creation_footer", footer)
         embed.set_footer(text=footer, icon_url=self.bot.guild.icon_url)
@@ -308,12 +308,12 @@ class Thread:
         if not message:
             if self.id == closer.id:
                 message = self.bot.config.get(
-                    "thread_self_close_response", "You have closed this Modmail thread."
+                    "thread_self_close_response", "Du lukkede samtalen."
                 )
             else:
                 message = self.bot.config.get(
                     "thread_close_response",
-                    "{closer.mention} has closed this Modmail thread.",
+                    "{closer.mention} har lukket samtalen.",
                 )
 
         message = message.format(closer=closer, loglink=log_url, logkey=log_data["key"] if log_data else None)
@@ -401,7 +401,7 @@ class Thread:
         # Grab message
         close_message = self.bot.config.get(
             "thread_auto_close_response",
-            f"This thread has been closed automatically due to inactivity "
+            f"Denne samtale er blev lukket automatisk grundet inaktivitet "
             f"after {human_time}.",
         )
         time_marker_regex = "%t"
@@ -460,8 +460,8 @@ class Thread:
             return await message.channel.send(
                 embed=discord.Embed(
                     color=discord.Color.red(),
-                    description="Your message could not be delivered since "
-                    "the recipient shares no servers with the bot.",
+                    description="Din besked kunne ikke blive leveret siden "
+                    "personen ikke deler nogen server med botten.",
                 )
             )
 
@@ -477,10 +477,10 @@ class Thread:
                 message.channel.send(
                     embed=discord.Embed(
                         color=discord.Color.red(),
-                        description="Your message could not be delivered as "
-                        "the recipient is only accepting direct "
-                        "messages from friends, or the bot was "
-                        "blocked by the recipient.",
+                        description="Din besked blev ikke leveret siden "
+                        "personen kun accepterer direkte "
+                        "beskeder fra venner, eller botten er "
+                        "blokeret af personen.",
                     )
                 )
             )
@@ -510,7 +510,7 @@ class Thread:
                     self.channel.send(
                         embed=discord.Embed(
                             color=discord.Color.red(),
-                            description="Scheduled close has been cancelled.",
+                            description="Den planlagte lukning er blevet annulleret.",
                         )
                     )
                 )
@@ -539,7 +539,7 @@ class Thread:
                 self.channel.send(
                     embed=discord.Embed(
                         color=discord.Color.red(),
-                        description="Scheduled close has been cancelled.",
+                        description="Planlagte lukning er annulleret.",
                     )
                 )
             )
@@ -651,7 +651,7 @@ class Thread:
             embed.color = self.bot.mod_color  # pylint: disable=E0237
             # Anonymous reply sent in thread channel
             if anonymous and isinstance(destination, discord.TextChannel):
-                embed.set_footer(text="Anonymous Reply")
+                embed.set_footer(text="Anonymt svar")
             # Normal messages
             elif not anonymous:
                 tag = self.bot.config.get("mod_tag", str(message.author.top_role))
@@ -860,7 +860,7 @@ class ThreadManager:
         # if not role_names:
         #     embed.add_field(name='Mention', value=user.mention)
         # embed.add_field(name='Registered', value=created + days(created))
-        embed.description += f" was created {days(created)}"
+        embed.description += f" var lavet {days(created)}"
 
         footer = "User ID: " + str(user.id)
         embed.set_footer(text=footer)
@@ -881,8 +881,8 @@ class ThreadManager:
 
         if log_count:
             # embed.add_field(name='Past logs', value=f'{log_count}')
-            thread = "thread" if log_count == 1 else "threads"
-            embed.description += f" with **{log_count}** past {thread}."
+            thread = "tråd" if log_count == 1 else "tråde"
+            embed.description += f" med **{log_count}** forbi {thread}."
         else:
             embed.description += "."
 
