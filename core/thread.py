@@ -167,7 +167,7 @@ class Thread:
 
         footer = self.bot.config.get("thread_creation_footer", footer)
         embed.set_footer(text=footer, icon_url=self.bot.guild.icon_url)
-        embed.title = self.bot.config.get("thread_creation_title", "Thread Created")
+        embed.title = self.bot.config.get("thread_creation_title", "Samtale Startet")
 
         if creator is None:
             msg = await recipient.send(embed=embed)
@@ -300,7 +300,7 @@ class Thread:
         # Thread closed message
 
         embed = discord.Embed(
-            title=self.bot.config.get("thread_close_title", "Thread Closed"),
+            title=self.bot.config.get("thread_close_title", "Samtale lukket"),
             color=discord.Color.red(),
             timestamp=datetime.utcnow(),
         )
@@ -308,7 +308,7 @@ class Thread:
         if not message:
             if self.id == closer.id:
                 message = self.bot.config.get(
-                    "thread_self_close_response", "Du lukkede samtalen."
+                    "thread_self_close_response", "Samtalen er lukket."
                 )
             else:
                 message = self.bot.config.get(
@@ -320,7 +320,7 @@ class Thread:
 
         embed.description = message
         footer = self.bot.config.get(
-            "thread_close_footer", "Replying will create a new thread"
+            "thread_close_footer", "Hvis du får mere på hjerte skal du bare skrive her igen og en ny samtale ville starte"
         )
         embed.set_footer(text=footer, icon_url=self.bot.guild.icon_url)
 
@@ -860,7 +860,7 @@ class ThreadManager:
         # if not role_names:
         #     embed.add_field(name='Mention', value=user.mention)
         # embed.add_field(name='Registered', value=created + days(created))
-        embed.description += f" var lavet {days(created)}"
+        embed.description += f" brugeren blev lavet {days(created)}"
 
         footer = "User ID: " + str(user.id)
         embed.set_footer(text=footer)
@@ -870,7 +870,7 @@ class ThreadManager:
         if member:
             joined = str((time - member.joined_at).days)
             # embed.add_field(name='Joined', value=joined + days(joined))
-            embed.description += f", joined {days(joined)}"
+            embed.description += f", joinede serveren {days(joined)}"
 
             if member.nick:
                 embed.add_field(name="Nickname", value=member.nick, inline=True)
@@ -881,8 +881,8 @@ class ThreadManager:
 
         if log_count:
             # embed.add_field(name='Past logs', value=f'{log_count}')
-            thread = "tråd" if log_count == 1 else "tråde"
-            embed.description += f" med **{log_count}** forbi {thread}."
+            thread = "gang" if log_count == 1 else "gang"
+            embed.description += f" . Har kontaktet os **{log_count}**  {thread}."
         else:
             embed.description += "."
 
