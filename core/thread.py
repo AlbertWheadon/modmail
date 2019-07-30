@@ -167,7 +167,7 @@ class Thread:
 
         footer = self.bot.config.get("thread_creation_footer", footer)
         embed.set_footer(text=footer, icon_url=self.bot.guild.icon_url)
-        embed.title = self.bot.config.get("thread_creation_title", "Samtale Startet")
+        embed.title = self.bot.config.get("thread_creation_title", "Samtale startet")
 
         if creator is None:
             msg = await recipient.send(embed=embed)
